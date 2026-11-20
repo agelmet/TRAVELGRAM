@@ -240,12 +240,12 @@ h2{font-size:clamp(32px,4.2vw,58px)}
 .tk-dates{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:14px;font-weight:600;color:var(--sea)}.tk-dates svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;flex-shrink:0}
 .tk-empty{grid-column:1/-1;padding:40px;border-radius:22px;background:#fff;text-align:center;color:var(--mut)}
 .trial-bar{position:fixed;left:50%;top:84px;transform:translateX(-50%);z-index:130;padding:10px 18px;border-radius:999px;background:#FFE08A;color:#3a2a00;font-size:14px;font-weight:700;box-shadow:var(--sh-2)}
-.tk{perspective:1600px;min-height:520px}
+.tk{perspective:1600px;display:grid;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .js .tk.rv{transform:translateY(40px) rotate(calc((var(--i) - 1)*1.4deg)) scale(.97)}
 .js .tk.rv.in{transform:none}
-.tk-in{position:relative;height:100%;transform-style:preserve-3d;transition:transform .85s var(--ease)}
+.tk-in{position:relative;display:grid;transform-style:preserve-3d;transition:transform .85s var(--ease)}
 .tk.flip .tk-in{transform:rotateY(180deg)}
-.tk-f,.tk-b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;background:#fff;box-shadow:var(--sh-1);overflow:hidden;display:flex;flex-direction:column}
+.tk-f,.tk-b{grid-area:1/1;min-width:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;background:#fff;box-shadow:var(--sh-1);overflow:hidden;display:flex;flex-direction:column}
 .tk-f{transition:box-shadow .45s var(--ease)}
 @media (hover:hover){.tk:hover .tk-f{box-shadow:var(--sh-2)}.tk:hover .tk-ph img{transform:scale(1.06)}}
 .tk-ph{position:relative;aspect-ratio:16/10;overflow:hidden;flex-shrink:0;background:var(--deep)}
@@ -260,25 +260,34 @@ h2{font-size:clamp(32px,4.2vw,58px)}
 .tk-code i::after{content:"";position:absolute;right:-2px;top:-3px;border:3.5px solid transparent;border-left:5px solid currentColor}
 .tk h3{font-size:22px;margin:10px 0 8px}
 .tk-body p{color:var(--mut);font-size:15px}
-.tk-stub{position:relative;display:grid;grid-template-columns:1fr auto;gap:10px 16px;padding:16px 24px 20px;border-top:2px dashed rgba(21,22,28,.16)}
+.tk-stub{position:relative;display:grid;grid-template-columns:1fr auto;gap:10px 16px;padding:16px 20px 20px 24px;border-top:2px dashed rgba(21,22,28,.16)}
 .tk-stub::before,.tk-stub::after{content:"";position:absolute;top:-12px;width:22px;height:22px;border-radius:50%;background:var(--sand)}
 .tk-stub::before{left:-11px}.tk-stub::after{right:-11px}
 .tk-l{display:block;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
 .tk-stub b{font-size:15.5px}
 .tk-pr{text-align:right}.tk-pr b{font-size:21px;font-variant-numeric:tabular-nums}
 .tk-pr small{display:block;font-size:12px;color:var(--mut)}
-.tk-flip{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:0 4px;font-weight:700;font-size:14.5px;border-top:1px solid var(--line);margin-top:4px}
-.tk-flip svg,.tk-back svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .35s var(--ease)}
-@media (hover:hover){.tk-flip:hover svg{transform:translateX(5px)}}
-.tk-b{transform:rotateY(180deg);padding:28px 26px;background:var(--deep);color:#fff}
+.tk-flip{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:10px;min-height:50px;margin-top:8px;padding:0 18px;border-radius:999px;background:var(--sand);color:var(--deep);font-weight:700;font-size:15px;transition:background .3s,color .3s}
+.tk-flip .ic-r{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .6s var(--ease)}
+@media (hover:hover){.tk:hover .tk-flip{background:var(--deep);color:#fff}.tk:hover .tk-flip .ic-r{transform:rotate(180deg)}}
+.tk-hint{position:absolute;top:14px;right:14px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:7px 12px 7px 10px;border-radius:999px;background:rgba(13,24,32,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;font-size:12.5px;font-weight:700;pointer-events:none}
+.tk-hint svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+.tk.nudge .tk-in{animation:tkNudge 1.1s var(--ease) 1}
+@keyframes tkNudge{0%,100%{transform:rotateY(0)}40%{transform:rotateY(-16deg)}70%{transform:rotateY(5deg)}}
+@media (prefers-reduced-motion:reduce){.tk.nudge .tk-in{animation:none}}
+.tk-back svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .35s var(--ease)}
+
+.tk-b{transform:rotateY(180deg);padding:26px 26px 24px;background:var(--deep);color:#fff}
 .tk-b .tk-code{color:var(--amber-2)}
-.tk-b ul{list-style:none;margin:20px 0 auto;display:grid;gap:12px}
+.tk-b ul{list-style:none;margin:18px 0 auto;display:grid;gap:12px;align-content:start}
 .tk-b li{position:relative;padding-left:24px;font-size:15.5px;color:rgba(255,255,255,.9)}
 .tk-b li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--amber)}
 .tk-cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:22px}
 .tk-cta .btn{background:var(--amber);color:var(--ink)}
 .tk-b .lnk{color:#fff}
-.tk-back{position:absolute;top:18px;right:18px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.1)}
+.tk-back{display:inline-flex;align-items:center;justify-content:center;gap:8px;align-self:flex-start;min-height:42px;margin-top:16px;padding:0 16px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font-weight:700;font-size:14px}
+.tk-b h3{padding-right:0}
 .tk-note{margin-top:34px;font-size:14.5px;color:var(--mut);max-width:880px}
 
 /* armenia */
@@ -519,7 +528,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
  .svc{grid-template-columns:1fr}.svc-c:nth-child(n){grid-column:auto}
  .tabs{display:flex;width:100%}.tabs button{flex:1;justify-content:center;padding:0 10px;font-size:14px}.tabs button small{display:none}
  .tk-grid,.tk-grid.n4{grid-template-columns:1fr}
- .tk{min-height:500px}
+
  .arm-q{grid-template-columns:1fr}
  .steps{grid-template-columns:1fr}
  .rv-track{grid-auto-columns:88%}
@@ -693,7 +702,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
   <div class="tk-grid tk-day" id="p-day" role="tabpanel" aria-labelledby="t-day"><article class="tk rv" data-kind="day" data-id="hyd-1" style="--i:0">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-krouaziera-ydra-poros-aigina-900.webp" srcset="assets/img/travelgram-krouaziera-ydra-poros-aigina-900.webp 900w, assets/img/travelgram-krouaziera-ydra-poros-aigina-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Ύδρα · Πόρος · Αίγινα — Κρουαζιέρα σε τρία νησιά, σε μία μέρα" data-en-alt="Hydra · Poros · Aegina — A cruise to three islands in one day" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-krouaziera-ydra-poros-aigina-900.webp" srcset="assets/img/travelgram-krouaziera-ydra-poros-aigina-900.webp 900w, assets/img/travelgram-krouaziera-ydra-poros-aigina-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Ύδρα · Πόρος · Αίγινα — Κρουαζιέρα σε τρία νησιά, σε μία μέρα" data-en-alt="Hydra · Poros · Aegina — A cruise to three islands in one day" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> HYD</span>
     <h3 data-en="Hydra · Poros · Aegina">Ύδρα · Πόρος · Αίγινα</h3>
@@ -702,7 +711,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="~12 hours">~12 ώρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="€125">125 €</b><small data-en="children 5–11: €110">παιδιά 5–11: 110 €</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Ύδρα · Πόρος · Αίγινα" data-en-aria="What is included — Hydra · Poros · Aegina"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Ύδρα · Πόρος · Αίγινα" data-en-aria="See what is included — Hydra · Poros · Aegina"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -713,13 +722,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%8E%CE%B4%CF%81%CE%B1%20%C2%B7%20%CE%A0%CF%8C%CF%81%CE%BF%CF%82%20%C2%B7%20%CE%91%CE%AF%CE%B3%CE%B9%CE%BD%CE%B1" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article><article class="tk rv" data-kind="day" data-id="ags-2" style="--i:1">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph tk-type" aria-hidden="true"><svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sea-ags-2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C27A"/><stop offset=".46" stop-color="#E98F5A"/><stop offset=".47" stop-color="#1C6B7E"/><stop offset="1" stop-color="#0B3442"/></linearGradient></defs><rect width="400" height="225" fill="url(#sea-ags-2)"/><circle cx="200" cy="104" r="34" fill="#FFE2A8" opacity=".9"/><path class="wv w1" d="M0 140c40-8 80 8 120 0s80-8 120 0 80 8 120 0 80-8 120 0" stroke="#9FD3DD" stroke-width="2" fill="none" opacity=".7"/><path class="wv w2" d="M0 165c40-8 80 8 120 0s80-8 120 0 80 8 120 0 80-8 120 0" stroke="#9FD3DD" stroke-width="2" fill="none" opacity=".45"/><path d="M150 128h100l-14 14h-74z" fill="#0B2530"/><path d="M182 128v-20h14l10 20" fill="#F7F3EC"/></svg><span class="tk-tag" data-en="Buffet · wine · sunset DJ">Μπουφές · κρασί · sunset DJ</span></div>
+   <div class="tk-ph tk-type"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><svg aria-hidden="true" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sea-ags-2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C27A"/><stop offset=".46" stop-color="#E98F5A"/><stop offset=".47" stop-color="#1C6B7E"/><stop offset="1" stop-color="#0B3442"/></linearGradient></defs><rect width="400" height="225" fill="url(#sea-ags-2)"/><circle cx="200" cy="104" r="34" fill="#FFE2A8" opacity=".9"/><path class="wv w1" d="M0 140c40-8 80 8 120 0s80-8 120 0 80 8 120 0 80-8 120 0" stroke="#9FD3DD" stroke-width="2" fill="none" opacity=".7"/><path class="wv w2" d="M0 165c40-8 80 8 120 0s80-8 120 0 80 8 120 0 80-8 120 0" stroke="#9FD3DD" stroke-width="2" fill="none" opacity=".45"/><path d="M150 128h100l-14 14h-74z" fill="#0B2530"/><path d="M182 128v-20h14l10 20" fill="#F7F3EC"/></svg><span class="tk-tag" data-en="Buffet · wine · sunset DJ">Μπουφές · κρασί · sunset DJ</span></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> AGS</span>
     <h3 data-en="Agistri · Metopi · Aegina">Αγκίστρι · Μετώπη · Αίγινα</h3>
@@ -728,7 +737,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="~9 hours · May–October">~9 ώρες · Μάιος–Οκτώβριος</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="€95">95 €</b><small data-en="children 5–11: €80">παιδιά 5–11: 80 €</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Αγκίστρι · Μετώπη · Αίγινα" data-en-aria="What is included — Agistri · Metopi · Aegina"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Αγκίστρι · Μετώπη · Αίγινα" data-en-aria="See what is included — Agistri · Metopi · Aegina"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -739,13 +748,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%91%CE%B3%CE%BA%CE%AF%CF%83%CF%84%CF%81%CE%B9%20%C2%B7%20%CE%9C%CE%B5%CF%84%CF%8E%CF%80%CE%B7%20%C2%B7%20%CE%91%CE%AF%CE%B3%CE%B9%CE%BD%CE%B1" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article><article class="tk rv" data-kind="day" data-id="ath-3" style="--i:2">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-athina-akropoli-ksenagisi-900.webp" srcset="assets/img/travelgram-athina-akropoli-ksenagisi-900.webp 900w, assets/img/travelgram-athina-akropoli-ksenagisi-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Αθήνα σε 5 ώρες — Ιδιωτική ξενάγηση στα μνημεία της πόλης" data-en-alt="Athens in 5 hours — A private tour of the city’s landmarks" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-athina-akropoli-ksenagisi-900.webp" srcset="assets/img/travelgram-athina-akropoli-ksenagisi-900.webp 900w, assets/img/travelgram-athina-akropoli-ksenagisi-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Αθήνα σε 5 ώρες — Ιδιωτική ξενάγηση στα μνημεία της πόλης" data-en-alt="Athens in 5 hours — A private tour of the city’s landmarks" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> ATH</span>
     <h3 data-en="Athens in 5 hours">Αθήνα σε 5 ώρες</h3>
@@ -754,7 +763,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="5 hours">5 ώρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="€50">50 €</b><small data-en="per person">ανά άτομο</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Αθήνα σε 5 ώρες" data-en-aria="What is included — Athens in 5 hours"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Αθήνα σε 5 ώρες" data-en-aria="See what is included — Athens in 5 hours"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -765,13 +774,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%91%CE%B8%CE%AE%CE%BD%CE%B1%20%CF%83%CE%B5%205%20%CF%8E%CF%81%CE%B5%CF%82" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article><article class="tk rv" data-kind="day" data-id="sou-4" style="--i:3">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-sounio-naos-poseidona-900.webp" srcset="assets/img/travelgram-sounio-naos-poseidona-900.webp 900w, assets/img/travelgram-sounio-naos-poseidona-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Σούνιο — Ο Ναός του Ποσειδώνα στο ηλιοβασίλεμα" data-en-alt="Sounio — The Temple of Poseidon at sunset" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-sounio-naos-poseidona-900.webp" srcset="assets/img/travelgram-sounio-naos-poseidona-900.webp 900w, assets/img/travelgram-sounio-naos-poseidona-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Σούνιο — Ο Ναός του Ποσειδώνα στο ηλιοβασίλεμα" data-en-alt="Sounio — The Temple of Poseidon at sunset" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> SOU</span>
     <h3 data-en="Sounio">Σούνιο</h3>
@@ -780,7 +789,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="4 hours">4 ώρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="€46">46 €</b><small data-en="per person">ανά άτομο</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Σούνιο" data-en-aria="What is included — Sounio"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Σούνιο" data-en-aria="See what is included — Sounio"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -791,13 +800,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%A3%CE%BF%CF%8D%CE%BD%CE%B9%CE%BF" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article><article class="tk rv" data-kind="day" data-id="naf-5" style="--i:4">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-peloponnisos-nafplio-bourtzi-900.webp" srcset="assets/img/travelgram-peloponnisos-nafplio-bourtzi-900.webp 900w, assets/img/travelgram-peloponnisos-nafplio-bourtzi-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Πελοπόννησος — Ισθμός, Ναύπλιο και Επίδαυρος σε μία μέρα" data-en-alt="Peloponnese — Corinth Canal, Nafplio and Epidaurus in one day" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-peloponnisos-nafplio-bourtzi-900.webp" srcset="assets/img/travelgram-peloponnisos-nafplio-bourtzi-900.webp 900w, assets/img/travelgram-peloponnisos-nafplio-bourtzi-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Πελοπόννησος — Ισθμός, Ναύπλιο και Επίδαυρος σε μία μέρα" data-en-alt="Peloponnese — Corinth Canal, Nafplio and Epidaurus in one day" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> NAF</span>
     <h3 data-en="Peloponnese">Πελοπόννησος</h3>
@@ -806,7 +815,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="9 hours">9 ώρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="€105">105 €</b><small data-en="per person">ανά άτομο</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Πελοπόννησος" data-en-aria="What is included — Peloponnese"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Πελοπόννησος" data-en-aria="See what is included — Peloponnese"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -817,13 +826,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%A0%CE%B5%CE%BB%CE%BF%CF%80%CF%8C%CE%BD%CE%BD%CE%B7%CF%83%CE%BF%CF%82" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article><article class="tk rv" data-kind="day" data-id="met-6" style="--i:5">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-meteora-monastiria-900.webp" srcset="assets/img/travelgram-meteora-monastiria-900.webp 900w, assets/img/travelgram-meteora-monastiria-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Μετέωρα — Μονοήμερη με πούλμαν, με προαιρετικό γεύμα" data-en-alt="Meteora — A day trip by coach, with optional lunch" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-meteora-monastiria-900.webp" srcset="assets/img/travelgram-meteora-monastiria-900.webp 900w, assets/img/travelgram-meteora-monastiria-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Μετέωρα — Μονοήμερη με πούλμαν, με προαιρετικό γεύμα" data-en-alt="Meteora — A day trip by coach, with optional lunch" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> MET</span>
     <h3 data-en="Meteora">Μετέωρα</h3>
@@ -832,7 +841,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="~14.5 hours">~14,5 ώρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="€120">120 €</b><small data-en="per person">ανά άτομο</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Μετέωρα" data-en-aria="What is included — Meteora"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Μετέωρα" data-en-aria="See what is included — Meteora"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -843,13 +852,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%9C%CE%B5%CF%84%CE%AD%CF%89%CF%81%CE%B1" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article></div><div class="tk-grid tk-multi n4" id="p-multi" role="tabpanel" aria-labelledby="t-multi" hidden><article class="tk rv" data-kind="multi" data-id="her-7" style="--i:0">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-kriti-rethymno-limani-900.webp" srcset="assets/img/travelgram-kriti-rethymno-limani-900.webp 900w, assets/img/travelgram-kriti-rethymno-limani-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Ο γύρος της Κρήτης — Ηράκλειο, Ρέθυμνο, Χανιά, Λασίθι, Κνωσός, Μάταλα" data-en-alt="The tour of Crete — Heraklion, Rethymno, Chania, Lasithi, Knossos, Matala" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-kriti-rethymno-limani-900.webp" srcset="assets/img/travelgram-kriti-rethymno-limani-900.webp 900w, assets/img/travelgram-kriti-rethymno-limani-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Ο γύρος της Κρήτης — Ηράκλειο, Ρέθυμνο, Χανιά, Λασίθι, Κνωσός, Μάταλα" data-en-alt="The tour of Crete — Heraklion, Rethymno, Chania, Lasithi, Knossos, Matala" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> HER</span>
     <h3 data-en="The tour of Crete">Ο γύρος της Κρήτης</h3>
@@ -858,7 +867,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="6 days">6 ημέρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="from €380">από 380 €</b><small data-en="half board">με ημιδιατροφή</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Ο γύρος της Κρήτης" data-en-aria="What is included — The tour of Crete"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Ο γύρος της Κρήτης" data-en-aria="See what is included — The tour of Crete"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -869,13 +878,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%9F%20%CE%B3%CF%8D%CF%81%CE%BF%CF%82%20%CF%84%CE%B7%CF%82%20%CE%9A%CF%81%CE%AE%CF%84%CE%B7%CF%82" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article><article class="tk rv" data-kind="multi" data-id="cfu-8" style="--i:1">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-kerkyra-parga-900.webp" srcset="assets/img/travelgram-kerkyra-parga-900.webp 900w, assets/img/travelgram-kerkyra-parga-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Κέρκυρα · Πάργα — Πέντε μέρες στο Ιόνιο" data-en-alt="Corfu · Parga — Five days in the Ionian" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-kerkyra-parga-900.webp" srcset="assets/img/travelgram-kerkyra-parga-900.webp 900w, assets/img/travelgram-kerkyra-parga-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Κέρκυρα · Πάργα — Πέντε μέρες στο Ιόνιο" data-en-alt="Corfu · Parga — Five days in the Ionian" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> CFU</span>
     <h3 data-en="Corfu · Parga">Κέρκυρα · Πάργα</h3>
@@ -884,7 +893,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="5 days">5 ημέρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="from €340">από 340 €</b><small data-en="per person">ανά άτομο</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Κέρκυρα · Πάργα" data-en-aria="What is included — Corfu · Parga"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Κέρκυρα · Πάργα" data-en-aria="See what is included — Corfu · Parga"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -895,13 +904,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%9A%CE%AD%CF%81%CE%BA%CF%85%CF%81%CE%B1%20%C2%B7%20%CE%A0%CE%AC%CF%81%CE%B3%CE%B1" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article><article class="tk rv" data-kind="multi" data-id="efl-9" style="--i:2">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-kefalonia-fiskardo-900.webp" srcset="assets/img/travelgram-kefalonia-fiskardo-900.webp 900w, assets/img/travelgram-kefalonia-fiskardo-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Κεφαλονιά — Ιθάκη, Φισκάρδο, παραλία Ξι" data-en-alt="Kefalonia — Ithaca, Fiskardo, Xi beach" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-kefalonia-fiskardo-900.webp" srcset="assets/img/travelgram-kefalonia-fiskardo-900.webp 900w, assets/img/travelgram-kefalonia-fiskardo-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Κεφαλονιά — Ιθάκη, Φισκάρδο, παραλία Ξι" data-en-alt="Kefalonia — Ithaca, Fiskardo, Xi beach" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> EFL</span>
     <h3 data-en="Kefalonia">Κεφαλονιά</h3>
@@ -910,7 +919,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="5 days">5 ημέρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="from €375">από 375 €</b><small data-en="per person">ανά άτομο</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Κεφαλονιά" data-en-aria="What is included — Kefalonia"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Κεφαλονιά" data-en-aria="See what is included — Kefalonia"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -921,13 +930,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%9A%CE%B5%CF%86%CE%B1%CE%BB%CE%BF%CE%BD%CE%B9%CE%AC" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article><article class="tk rv" data-kind="multi" data-id="zth-10" style="--i:3">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-zakynthos-navagio-900.webp" srcset="assets/img/travelgram-zakynthos-navagio-900.webp 900w, assets/img/travelgram-zakynthos-navagio-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Ζάκυνθος — Το νησί με το πιο διάσημο ναυάγιο" data-en-alt="Zakynthos — The island of the famous shipwreck beach" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-zakynthos-navagio-900.webp" srcset="assets/img/travelgram-zakynthos-navagio-900.webp 900w, assets/img/travelgram-zakynthos-navagio-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Ζάκυνθος — Το νησί με το πιο διάσημο ναυάγιο" data-en-alt="Zakynthos — The island of the famous shipwreck beach" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> ZTH</span>
     <h3 data-en="Zakynthos">Ζάκυνθος</h3>
@@ -936,7 +945,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="5 days">5 ημέρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="from €350">από 350 €</b><small data-en="per person">ανά άτομο</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Ζάκυνθος" data-en-aria="What is included — Zakynthos"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Ζάκυνθος" data-en-aria="See what is included — Zakynthos"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -947,13 +956,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%96%CE%AC%CE%BA%CF%85%CE%BD%CE%B8%CE%BF%CF%82" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article></div><div class="tk-grid tk-abroad" id="p-abroad" role="tabpanel" aria-labelledby="t-abroad" hidden><article class="tk rv" data-kind="abroad" data-id="evn-11" style="--i:0">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-armenia-gerevan-ararat-900.webp" srcset="assets/img/travelgram-armenia-gerevan-ararat-900.webp 900w, assets/img/travelgram-armenia-gerevan-ararat-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Οι θησαυροί της Αρμενίας — Αεροπορική εκδρομή, Γερεβάν και ο Αραράτ" data-en-alt="Treasures of Armenia — By air — Yerevan and Mount Ararat" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-armenia-gerevan-ararat-900.webp" srcset="assets/img/travelgram-armenia-gerevan-ararat-900.webp 900w, assets/img/travelgram-armenia-gerevan-ararat-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Οι θησαυροί της Αρμενίας — Αεροπορική εκδρομή, Γερεβάν και ο Αραράτ" data-en-alt="Treasures of Armenia — By air — Yerevan and Mount Ararat" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> EVN</span>
     <h3 data-en="Treasures of Armenia">Οι θησαυροί της Αρμενίας</h3>
@@ -962,7 +971,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="7 days">7 ημέρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="from €1,250">από 1.250 €</b><small data-en="by air">αεροπορικώς</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Οι θησαυροί της Αρμενίας" data-en-aria="What is included — Treasures of Armenia"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Οι θησαυροί της Αρμενίας" data-en-aria="See what is included — Treasures of Armenia"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -973,13 +982,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%9F%CE%B9%20%CE%B8%CE%B7%CF%83%CE%B1%CF%85%CF%81%CE%BF%CE%AF%20%CF%84%CE%B7%CF%82%20%CE%91%CF%81%CE%BC%CE%B5%CE%BD%CE%AF%CE%B1%CF%82" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article><article class="tk rv" data-kind="abroad" data-id="grn-12" style="--i:1">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-armenia-naos-garni-900.webp" srcset="assets/img/travelgram-armenia-naos-garni-900.webp 900w, assets/img/travelgram-armenia-naos-garni-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Τα διαμάντια της Αρμενίας — Εννιά μέρες για να τη γνωρίσετε σε βάθος" data-en-alt="Diamonds of Armenia — Nine days to know it in depth" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-armenia-naos-garni-900.webp" srcset="assets/img/travelgram-armenia-naos-garni-900.webp 900w, assets/img/travelgram-armenia-naos-garni-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Τα διαμάντια της Αρμενίας — Εννιά μέρες για να τη γνωρίσετε σε βάθος" data-en-alt="Diamonds of Armenia — Nine days to know it in depth" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> GRN</span>
     <h3 data-en="Diamonds of Armenia">Τα διαμάντια της Αρμενίας</h3>
@@ -988,7 +997,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="9 days">9 ημέρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="Ask us">Ρωτήστε μας</b><small data-en="by air">αεροπορικώς</small></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Τα διαμάντια της Αρμενίας" data-en-aria="What is included — Diamonds of Armenia"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Τα διαμάντια της Αρμενίας" data-en-aria="See what is included — Diamonds of Armenia"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -999,13 +1008,13 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%A4%CE%B1%20%CE%B4%CE%B9%CE%B1%CE%BC%CE%AC%CE%BD%CF%84%CE%B9%CE%B1%20%CF%84%CE%B7%CF%82%20%CE%91%CF%81%CE%BC%CE%B5%CE%BD%CE%AF%CE%B1%CF%82" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article><article class="tk rv" data-kind="abroad" data-id="bds-13" style="--i:2">
  <div class="tk-in">
   <div class="tk-f">
-   <div class="tk-ph"><img src="assets/img/travelgram-notia-italia-alberobello-900.webp" srcset="assets/img/travelgram-notia-italia-alberobello-900.webp 900w, assets/img/travelgram-notia-italia-alberobello-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Τα ελληνόφωνα χωριά της Κάτω Ιταλίας — Λέτσε · Γκαλίπολι · Τάραντας · Ότραντο · Οστούνι · Αλμπερομπέλο" data-en-alt="The Greek-speaking villages of Southern Italy — Lecce · Gallipoli · Taranto · Otranto · Ostuni · Alberobello" loading="lazy" decoding="async"></div>
+   <div class="tk-ph"><span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span><img src="assets/img/travelgram-notia-italia-alberobello-900.webp" srcset="assets/img/travelgram-notia-italia-alberobello-900.webp 900w, assets/img/travelgram-notia-italia-alberobello-1600.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw" width="1600" height="903" alt="Τα ελληνόφωνα χωριά της Κάτω Ιταλίας — Λέτσε · Γκαλίπολι · Τάραντας · Ότραντο · Οστούνι · Αλμπερομπέλο" data-en-alt="The Greek-speaking villages of Southern Italy — Lecce · Gallipoli · Taranto · Otranto · Ostuni · Alberobello" loading="lazy" decoding="async"></div>
    <div class="tk-body">
     <span class="tk-code">ATH <i></i> BDS</span>
     <h3 data-en="The Greek-speaking villages of Southern Italy">Τα ελληνόφωνα χωριά της Κάτω Ιταλίας</h3>
@@ -1014,7 +1023,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
    <div class="tk-stub">
     <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b data-en="6 days">6 ημέρες</b></div>
     <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b data-en="Ask us">Ρωτήστε μας</b></div>
-    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — Τα ελληνόφωνα χωριά της Κάτω Ιταλίας" data-en-aria="What is included — The Greek-speaking villages of Southern Italy"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — Τα ελληνόφωνα χωριά της Κάτω Ιταλίας" data-en-aria="See what is included — The Greek-speaking villages of Southern Italy"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>
    </div>
   </div>
   <div class="tk-b" aria-hidden="true">
@@ -1025,7 +1034,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
     <a class="btn btn-s" href="tel:+302104968953" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>
     <a class="lnk" href="mailto:travelgram.agency@yahoo.com?subject=%CE%9A%CF%81%CE%AC%CF%84%CE%B7%CF%83%CE%B7%3A%20%CE%A4%CE%B1%20%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CF%8C%CF%86%CF%89%CE%BD%CE%B1%20%CF%87%CF%89%CF%81%CE%B9%CE%AC%20%CF%84%CE%B7%CF%82%20%CE%9A%CE%AC%CF%84%CF%89%20%CE%99%CF%84%CE%B1%CE%BB%CE%AF%CE%B1%CF%82" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>
    </div>
-   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>
   </div>
  </div>
 </article></div>
@@ -1277,16 +1286,17 @@ h2{font-size:clamp(32px,4.2vw,58px)}
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function E(el, en) { el = el || ''; en = en || el; return 'data-en="' + esc(esc(en)) + '">' + esc(el); }
   function isOn(t, today) { if (t.show === false) return false; if (t.until && today && t.until < today) return false; return true; }
+  var HINT = '<span class="tk-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/></svg><span data-en="Tap for details">Πατήστε για λεπτομέρειες</span></span>';
   function media(t) {
     var alt = esc((t.t || '') + (t.s ? ' — ' + t.s : '')), altE = esc((t.te || t.t || '') + ((t.se || t.s) ? ' — ' + (t.se || t.s) : ''));
     var sz = '(max-width:700px) 92vw, (max-width:1100px) 46vw, 30vw';
     if (t.img && !/[\/:]/.test(t.img)) {
-      return '<div class="tk-ph"><img src="assets/img/travelgram-' + t.img + '-900.webp" srcset="assets/img/travelgram-' + t.img + '-900.webp 900w, assets/img/travelgram-' + t.img +
+      return '<div class="tk-ph">' + HINT + '<img src="assets/img/travelgram-' + t.img + '-900.webp" srcset="assets/img/travelgram-' + t.img + '-900.webp 900w, assets/img/travelgram-' + t.img +
         '-1600.webp 1600w" sizes="' + sz + '" width="1600" height="903" alt="' + alt + '" data-en-alt="' + altE + '" loading="lazy" decoding="async"></div>';
     }
-    if (t.img) return '<div class="tk-ph"><img src="' + esc(t.img) + '" width="1600" height="1000" alt="' + alt + '" data-en-alt="' + altE + '" loading="lazy" decoding="async"></div>';
+    if (t.img) return '<div class="tk-ph">' + HINT + '<img src="' + esc(t.img) + '" width="1600" height="1000" alt="' + alt + '" data-en-alt="' + altE + '" loading="lazy" decoding="async"></div>';
     var tag = t.tag || 'Μπουφές · κρασί · sunset DJ', tagE = t.tage || 'Buffet · wine · sunset DJ';
-    return '<div class="tk-ph tk-type" aria-hidden="true"><svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sea-' + esc(t.id) + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C27A"/><stop offset=".46" stop-color="#E98F5A"/><stop offset=".47" stop-color="#1C6B7E"/><stop offset="1" stop-color="#0B3442"/></linearGradient></defs>' +
+    return '<div class="tk-ph tk-type">' + HINT + '<svg aria-hidden="true" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sea-' + esc(t.id) + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C27A"/><stop offset=".46" stop-color="#E98F5A"/><stop offset=".47" stop-color="#1C6B7E"/><stop offset="1" stop-color="#0B3442"/></linearGradient></defs>' +
       '<rect width="400" height="225" fill="url(#sea-' + esc(t.id) + ')"/><circle cx="200" cy="104" r="34" fill="#FFE2A8" opacity=".9"/><path class="wv w1" d="M0 140c40-8 80 8 120 0s80-8 120 0 80 8 120 0 80-8 120 0" stroke="#9FD3DD" stroke-width="2" fill="none" opacity=".7"/><path class="wv w2" d="M0 165c40-8 80 8 120 0s80-8 120 0 80 8 120 0 80-8 120 0" stroke="#9FD3DD" stroke-width="2" fill="none" opacity=".45"/><path d="M150 128h100l-14 14h-74z" fill="#0B2530"/><path d="M182 128v-20h14l10 20" fill="#F7F3EC"/></svg>' +
       (t.img === '' && t.kind === 'day' && /AGS/.test(t.code || '') ? '<span class="tk-tag" ' + E(tag, tagE) + '</span>' : '') + '</div>';
   }
@@ -1301,10 +1311,10 @@ h2{font-size:clamp(32px,4.2vw,58px)}
       '\n   <div class="tk-body">\n    <span class="tk-code">ATH <i></i> ' + code + '</span>\n    <h3 ' + E(t.t, t.te) + '</h3>\n    ' + (t.s ? '<p ' + E(t.s, t.se) + '</p>' : '') + dates + '\n   </div>\n   <div class="tk-stub">\n' +
       '    <div><span class="tk-l" data-en="Duration">Διάρκεια</span><b ' + E(t.dur || '—', t.due) + '</b></div>\n' +
       '    <div class="tk-pr"><span class="tk-l" data-en="Price">Τιμή</span><b ' + E(t.price || 'Ρωτήστε μας', t.pe || (t.price ? '' : 'Ask us')) + '</b>' + pnote + '</div>\n' +
-      '    <button class="tk-flip" type="button" aria-label="Τι περιλαμβάνει — ' + esc(t.t) + '" data-en-aria="What is included — ' + esc(t.te || t.t) + '"><span data-en="What’s included">Τι περιλαμβάνει</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>\n   </div>\n  </div>\n' +
+      '    <button class="tk-flip" type="button" aria-label="Δείτε τι περιλαμβάνει — ' + esc(t.t) + '" data-en-aria="See what is included — ' + esc(t.te || t.t) + '"><svg class="ic-r" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span data-en="See what’s included">Δείτε τι περιλαμβάνει</span></button>\n   </div>\n  </div>\n' +
       '  <div class="tk-b" aria-hidden="true">\n   <span class="tk-code">ATH <i></i> ' + code + '</span>\n   <h3 ' + E(t.t, t.te) + '</h3>\n   <ul>' + li + '</ul>\n   <div class="tk-cta">\n' +
       '    <a class="btn btn-s" href="tel:' + TEL + '" tabindex="-1" data-en="Book a seat">Κλείστε θέση</a>\n    <a class="lnk" href="mailto:' + MAIL + '?subject=' + subj + '" tabindex="-1" data-en="Send an e-mail">Στείλτε e-mail</a>\n   </div>\n' +
-      '   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω" data-en-aria="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>\n  </div>\n </div>\n</article>';
+      '   <button class="tk-back" type="button" tabindex="-1" aria-label="Πίσω στην κάρτα" data-en-aria="Back to the card"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-en="Back">Πίσω</span></button>\n  </div>\n </div>\n</article>';
   }
   function render(c, today) {
     var out = { day: '', multi: '', abroad: '', n: { day: 0, multi: 0, abroad: 0 } };
@@ -1428,8 +1438,10 @@ d.querySelectorAll('[data-go]').forEach(function(a){a.addEventListener('click',f
 addEventListener('resize',inkTabs);setTimeout(inkTabs,60);
 function wireTickets(){d.querySelectorAll('.tk:not([data-w])').forEach(function(tk){tk.setAttribute('data-w','1');var f=tk.querySelector('.tk-f'),b=tk.querySelector('.tk-b');
  function set(on){tk.classList.toggle('flip',on);b.setAttribute('aria-hidden',!on);f.setAttribute('aria-hidden',on);b.querySelectorAll('a,button').forEach(function(x){x.tabIndex=on?0:-1});f.querySelectorAll('button').forEach(function(x){x.tabIndex=on?-1:0});if(on)setTimeout(function(){b.querySelector('a').focus({preventScroll:true})},500)}
- tk.querySelector('.tk-flip').addEventListener('click',function(){set(true)});tk.querySelector('.tk-back').addEventListener('click',function(){set(false)});
- var ph=tk.querySelector('.tk-ph img');if(ph)ph.addEventListener('click',function(){set(true)});});}
+ tk.addEventListener('click',function(e){if(e.target.closest('a'))return;if(e.target.closest('.tk-back')){set(false);return}set(!tk.classList.contains('flip'))});
+});}
+/* one gentle half-turn on the first card when the trips appear, so people see the cards turn */
+(function(){var g=d.getElementById('taxidia');if(!g||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.disconnect();setTimeout(function(){var tk=d.querySelector('.tk-grid:not([hidden]) .tk');if(!tk||tk.classList.contains('flip'))return;tk.classList.add('nudge');setTimeout(function(){tk.classList.remove('nudge')},1300)},1400)},{threshold:.35});io.observe(g)})();
 wireTickets();
 
 /* ---------- trips from the panel (published content / trial on the draft) ---------- */

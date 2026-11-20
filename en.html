@@ -135,6 +135,7 @@ html:not(.intro) #intro{display:none}
 .burger i:first-child{top:17px}.burger i:last-child{top:25px}
 .mnav{position:fixed;inset:0;z-index:150;background:var(--night);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:80px 32px 40px;gap:30px;opacity:0;transform:translateY(-12px);transition:opacity .35s,transform .45s var(--ease)}
 .mnav[hidden]{display:none}
+.mnav-brand{position:absolute;top:18px;left:22px;margin:0}
 .mnav.open{opacity:1;transform:none}
 .mnav nav{display:flex;flex-direction:column;gap:6px}
 .mnav nav a{font-size:30px;font-weight:700;padding:6px 0;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .5s var(--ease)}
@@ -567,7 +568,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
 </style>
 <script type="application/ld+json" id="advon-webpage">{"@context":"https://schema.org","@type":"WebPage","@id":"https://travelgramagency.gr/en#webpage","url":"https://travelgramagency.gr/en","name":"Travel agency in Athens | Travelgram Agency, Omonia","inLanguage":"en","dateModified":"2026-11-20","description":"Travelgram Agency, a travel agency at Omonia, Athens: island day cruises, multi-day tours, trips to Armenia, airport transfers and flight & ferry tickets.","isPartOf":{"@id":"#website"},"about":{"@id":"#agency"}}</script>
 </head>
-<body>
+<body id="top">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tgm" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27.5" fill="none" stroke="var(--mk-r,#E9A23B)" stroke-width="2.6"/><path d="M12.5 45.5c6.5-1.6 12.6-5.3 17.6-11" fill="none" stroke="var(--mk-d,currentColor)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray=".1 5.2"/><path d="M51 13 28.6 24.8l8.2 2.7 2.6 8.7 4.1-6.6 6.9 2.2z" fill="currentColor"/><path d="m36.8 27.5 4.7 2.3-2.1 6.4" fill="var(--mk-f,rgba(0,0,0,.18))"/></symbol></svg>
 <div id="intro" aria-hidden="true">
  <div class="bp">
@@ -586,7 +587,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
 
 <div class="prog" aria-hidden="true"><i></i></div>
 
-<header class="hd" id="top">
+<header class="hd">
  <div class="hd-in">
   <a class="brand" href="#top" aria-label="Travelgram Agency — back to top" data-en-aria="Travelgram Agency — back to top">
    <svg class="mk" aria-hidden="true"><use href="#tgm"/></svg>
@@ -612,6 +613,7 @@ h2{font-size:clamp(32px,4.2vw,58px)}
 </header>
 
 <div class="mnav" id="mnav" hidden>
+ <a class="brand brand-l mnav-brand" href="#top" aria-label="Travelgram Agency — back to top" data-en-aria="Travelgram Agency — back to top"><svg class="mk" aria-hidden="true"><use href="#tgm"/></svg><span class="wm"><b>TRAVELGRAM</b><small><i></i>AGENCY<i></i></small></span></a>
  <button class="mnav-x" type="button" aria-label="Close menu" data-en-aria="Close menu"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
  <nav aria-label="Mobile menu" data-en-aria="Mobile menu">
   <a href="#taxidia" data-en="Trips">Trips</a>
@@ -1353,7 +1355,7 @@ if(!RM&&!seen&&!d.hidden&&intro){H.classList.add('intro');try{sessionStorage.set
 function setLang(l){LANG=l;try{localStorage.setItem('tg-lang',l)}catch(e){}
  H.lang=l;d.title=META[l].t;var md=d.querySelector('meta[name=description]');if(md)md.content=META[l].d;
  d.querySelectorAll('[data-en]').forEach(function(e){if(e.dataset.el==null)e.dataset.el=e.innerHTML;e.innerHTML=l==='en'?e.dataset.en:e.dataset.el});
- [['data-en-alt','alt'],['data-en-aria','aria-label'],['data-en-title','title']].forEach(function(p){d.querySelectorAll('['+p[0]+']').forEach(function(e){var k='el'+p[1];if(e.dataset[k]==null)e.dataset[k]=e.getAttribute(p[1])||'';e.setAttribute(p[1],l==='en'?e.getAttribute(p[0]):e.dataset[k])})});
+ [['data-en-alt','alt'],['data-en-aria','aria-label'],['data-en-title','title']].forEach(function(p){d.querySelectorAll('['+p[0]+']').forEach(function(e){var k='el'+p[1].replace(/-./g,function(m){return m[1].toUpperCase()});if(e.dataset[k]==null)e.dataset[k]=e.getAttribute(p[1])||'';e.setAttribute(p[1],l==='en'?e.getAttribute(p[0]):e.dataset[k])})});
  d.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.l===l)});
  d.querySelectorAll('.lc').forEach(splitLc);fixMore();openNow();inkTabs();
 }
@@ -1427,6 +1429,11 @@ function mOpen(){mn.hidden=false;requestAnimationFrame(function(){mn.classList.a
 function mClose(){mn.classList.remove('open');bg.setAttribute('aria-expanded','false');d.body.style.overflow='';setTimeout(function(){mn.hidden=true},350)}
 bg.addEventListener('click',mOpen);mx.addEventListener('click',mClose);mn.querySelectorAll('a').forEach(function(a){a.addEventListener('click',mClose)});
 addEventListener('keydown',function(e){if(e.key==='Escape'){if(!mn.hidden)mClose();lbClose()}});
+
+/* ---------- every logo (and the back-to-top button) = start of the page ---------- */
+d.querySelectorAll('a[href="#top"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();if(!mn.hidden)mClose();
+ var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;window.scrollTo({top:0,behavior:rm?'auto':'smooth'});
+ if(location.hash)history.replaceState(null,'',location.pathname+location.search)})});
 
 /* ---------- trip tabs + tickets ---------- */
 var tabs=d.querySelectorAll('.tabs [role=tab]'),ink=d.querySelector('.tabs-ink');

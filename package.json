@@ -1,0 +1,7 @@
+{
+  "name": "travelgram",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Travelgram Agency — site + phone panel for trips (Netlify Functions + Blobs, edits never deploy)",
+  "dependencies": { "@netlify/blobs": "^11.0.3" }
+}

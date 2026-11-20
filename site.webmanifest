@@ -1,0 +1,26 @@
+{
+ "name": "Travelgram Agency",
+ "short_name": "Travelgram A",
+ "start_url": "./",
+ "display": "standalone",
+ "background_color": "#0D1820",
+ "theme_color": "#0D1820",
+ "icons": [
+  {
+   "src": "assets/icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "assets/icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "assets/icons/icon-512-maskable.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}

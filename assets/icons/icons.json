@@ -1,0 +1,16 @@
+{
+ "source": {
+  "kind": "file",
+  "ref": "assets/img/travelgram-agency-icon.svg"
+ },
+ "source_md5": "e5d345399a7ffa3ab2985342fe414b79",
+ "version": "004ea42f",
+ "tile": "#0D1820",
+ "crop": null,
+ "header": [
+  "inline",
+  "index.html",
+  "ddcab52441ed1732465a0cbbc6c7b013"
+ ],
+ "made": "2026-11-20"
+}
